@@ -8,10 +8,10 @@ let t = 15; // Inlier tolerance
 let bestModel = [0, 0];
 let bestCount = 0;
 
-exports.execute = function (signalData) {
+exports.ransac = function (dataArray) {
   let data = [];
-  signalData.array.forEach(element => {
-    data.push(JSON.parse(element).signal)
+  dataArray.forEach(element => {
+    data.push(element.signal)
   });
 
   for (let i = 1; i <= k; i++) {
@@ -49,18 +49,20 @@ exports.execute = function (signalData) {
   // Plot the data and the best fit line (using a different library or custom plotting code)
   
   // Displaying the inliers
-  console.log("Inliers of the data:");
-  console.log(data.filter((_, i) => inliers[i]));
+  // console.log("Inliers of the data:");
+  // console.log(data.filter((_, i) => inliers[i]));
   
   // Calculate the mode of the filtered data
-  let mode_value = calculateMode(data.filter((_, i) => inliers[i]));
-  console.log("Mode of the filtered data:");
-  console.log(mode_value);
+  // let mode_value = calculateMode(data.filter((_, i) => inliers[i]));
+  // console.log("Mode of the filtered data:");
+  // console.log(mode_value);
   
   // Calculate the mean of the filtered data
   let mean_value = calculateMean(data.filter((_, i) => inliers[i]));
   console.log("Mean of the filtered data:");
   console.log(mean_value);
+
+  //Logic for connecting to the blockchain goes here
 }
 
 

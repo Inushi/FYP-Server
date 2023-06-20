@@ -1,4 +1,4 @@
-// const { execute } = require("./services/ransac")
+const { cluster } = require("./services/cluster")
 
 const http = require("http")
 const server = http.createServer()
@@ -14,12 +14,12 @@ const dataArray = [];
 
 io.on("connection", (socket) => {
     socket.on("data-retrieve", (data) => {
-        console.log(data);
-        dataArray.push(JSON.parse(data).signal);
+
+        dataArray.push(JSON.parse(data));
         io.emit("data-retrieve", data);
 
-        if (dataArray.length >= 10) {
-            // execute(dataArray)
+        if (dataArray.length && dataArray.length%5 == 0) {
+            cluster(dataArray)
         } else {
             console.log("Pass");
         }
