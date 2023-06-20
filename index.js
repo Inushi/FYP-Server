@@ -12,15 +12,13 @@ const dataArray = [];
 
 io.on("connection", (socket) => {
     socket.on("data-retrieve", (data) => {
-        dataArray.push(data);
+        dataArray.push(data.signal);
         
         io.emit("data-retrieve", data);
 
         setTimeout(()=>{
-
+            console.log(dataArray);
         }, 20000)
-        console.log(dataArray);
-
     });
 
     socket.on("disconnect", () => {
