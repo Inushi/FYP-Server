@@ -7,16 +7,20 @@ const PORT = process.env.PORT || 3700;
 
 const signalLvel = -150;
 
+const dataArray = [];
+
+
 io.on("connection", (socket) => {
     socket.on("data-retrieve", (data) => {
-        console.log(data);
+        dataArray.push(data);
+        
         io.emit("data-retrieve", data);
 
-        if(signalLvel < -120){
-            let obj = JSON.parse(data)
-            // if()
-        }
-        
+        setTimeout(()=>{
+
+        }, 20000)
+        console.log(dataArray);
+
     });
 
     socket.on("disconnect", () => {
@@ -27,3 +31,4 @@ io.on("connection", (socket) => {
 server.listen(PORT, () => {
     console.log(`Listening on ${PORT}`);
 })
+
