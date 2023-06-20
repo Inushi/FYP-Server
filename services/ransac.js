@@ -8,7 +8,12 @@ let t = 15; // Inlier tolerance
 let bestModel = [0, 0];
 let bestCount = 0;
 
-function execute(data) {
+exports.execute = function (signalData) {
+  let data = [];
+  signalData.array.forEach(element => {
+    data.push(JSON.parse(element).signal)
+  });
+
   for (let i = 1; i <= k; i++) {
     // Randomly select n points
     let idx = [];
@@ -18,7 +23,7 @@ function execute(data) {
         idx.push(randomIdx);
       }
     }
-    let sample = idx.map((index) => (data[index]).signal);
+    let sample = idx.map((index) => data[index]);
   
     // Fit a line to the sample using linear regression
     let result = regression.linear(idx.map((index) => [index, data[index]]));
